@@ -21,7 +21,7 @@ public class NewMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ObjectNode json;
+        ObjectNode json = null;
         try {
             // TODO code application logic here
             json = (ObjectNode) new ObjectMapper().readTree("{\n"
@@ -120,6 +120,18 @@ public class NewMain {
             System.out.println("JSON " + json.toString());
         } catch (IOException ex) {
             Logger.getLogger(NewMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        System.out.println("Has key validation asdf " + hasKey(json, "asdf"));
+        System.out.println("Has key validation maltCase " + hasKey(json, "maltCase"));
+    }
+    
+    private static boolean hasKey(ObjectNode obj, String key) {
+        if (obj != null) {
+            return obj.has(key);
+        } else {
+            System.out.println("El objeto es nulo");
+            return false;
         }
     }
 
